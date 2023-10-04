@@ -13,10 +13,14 @@ public class Main {
         System.out.print("Input:");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String a, b, c;
-        String[] data = reader.readLine().split(" ");
+        String inputString=reader.readLine().replace(" ","");
+        String[] data =inputString.split("(?:\\+|-|\\*|/)");
+        if (data.length != 2)
+            throw new Exception("Некорректный ввод");
+
         a = data[0];
-        b = data[1];
-        c = data[2];
+        b = inputString.substring(a.length(),a.length()+1);
+        c = data[1];
         int q, w;
         boolean isRoman;
         try {
