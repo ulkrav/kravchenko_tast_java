@@ -12,14 +12,20 @@ public class Main {
     public static void main(String[] args) throws Exception {
         System.out.print("Input:");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String inputString = reader.readLine();
+        String result = calc(inputString);
+        System.out.println("Output: " + result);
+    }
+
+    public static String calc(String inputString) throws Exception {
+        inputString = inputString.replace(" ", "");
         String a, b, c;
-        String inputString=reader.readLine().replace(" ","");
-        String[] data =inputString.split("(?:\\+|-|\\*|/)");
+        String[] data = inputString.split("(?:\\+|-|\\*|/)");
         if (data.length != 2)
             throw new Exception("Некорректный ввод");
 
         a = data[0];
-        b = inputString.substring(a.length(),a.length()+1);
+        b = inputString.substring(a.length(), a.length() + 1);
         c = data[1];
         int q, w;
         boolean isRoman;
@@ -33,16 +39,16 @@ public class Main {
             isRoman = true;
         }
         if (q > 10 || w > 10) {
-            System.out.println("Число > 10");
+            throw new Exception("Число > 10");
         } else {
             int result = calc(q, w, b);
             if (isRoman) {
                 if (result <= 0) {
                     throw new Exception("Отрицательный результат в римской системе");
                 }
-                System.out.println("Output: " + convertNumToRoman(result));
+                return convertNumToRoman(result);
             } else {
-                System.out.println("Output: " + result);
+                return String.format("%d", result);
             }
         }
     }
